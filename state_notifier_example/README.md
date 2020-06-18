@@ -1,6 +1,10 @@
 # state_notifier_example
 
-State Norifierとfreezeの勉強したいだけで作ったサンプルアプリです
+State Norifierとfreezedの勉強したいだけで作ったサンプルアプリです
+
+[state_notifier](https://pub.dev/packages/state_notifier)
+[freezed](https://pub.dev/packages/freezed)
+
 
 - 赤ボタンを押すと赤パネルが増える
 - 緑ボタンを押すと緑パネルが増える
