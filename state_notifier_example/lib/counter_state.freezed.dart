@@ -15,10 +15,14 @@ CounterState _$CounterStateFromJson(Map<String, dynamic> json) {
 class _$CounterStateTearOff {
   const _$CounterStateTearOff();
 
-  _CounterState call({int count = 0, List<Red> items = const []}) {
+  _CounterState call(
+      {List<GridItem> items = const [],
+      int redCounts = 0,
+      int greenCounts = 0}) {
     return _CounterState(
-      count: count,
       items: items,
+      redCounts: redCounts,
+      greenCounts: greenCounts,
     );
   }
 }
@@ -27,8 +31,9 @@ class _$CounterStateTearOff {
 const $CounterState = _$CounterStateTearOff();
 
 mixin _$CounterState {
-  int get count;
-  List<Red> get items;
+  List<GridItem> get items;
+  int get redCounts;
+  int get greenCounts;
 
   Map<String, dynamic> toJson();
   $CounterStateCopyWith<CounterState> get copyWith;
@@ -38,7 +43,7 @@ abstract class $CounterStateCopyWith<$Res> {
   factory $CounterStateCopyWith(
           CounterState value, $Res Function(CounterState) then) =
       _$CounterStateCopyWithImpl<$Res>;
-  $Res call({int count, List<Red> items});
+  $Res call({List<GridItem> items, int redCounts, int greenCounts});
 }
 
 class _$CounterStateCopyWithImpl<$Res> implements $CounterStateCopyWith<$Res> {
@@ -50,12 +55,15 @@ class _$CounterStateCopyWithImpl<$Res> implements $CounterStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object count = freezed,
     Object items = freezed,
+    Object redCounts = freezed,
+    Object greenCounts = freezed,
   }) {
     return _then(_value.copyWith(
-      count: count == freezed ? _value.count : count as int,
-      items: items == freezed ? _value.items : items as List<Red>,
+      items: items == freezed ? _value.items : items as List<GridItem>,
+      redCounts: redCounts == freezed ? _value.redCounts : redCounts as int,
+      greenCounts:
+          greenCounts == freezed ? _value.greenCounts : greenCounts as int,
     ));
   }
 }
@@ -66,7 +74,7 @@ abstract class _$CounterStateCopyWith<$Res>
           _CounterState value, $Res Function(_CounterState) then) =
       __$CounterStateCopyWithImpl<$Res>;
   @override
-  $Res call({int count, List<Red> items});
+  $Res call({List<GridItem> items, int redCounts, int greenCounts});
 }
 
 class __$CounterStateCopyWithImpl<$Res> extends _$CounterStateCopyWithImpl<$Res>
@@ -80,52 +88,65 @@ class __$CounterStateCopyWithImpl<$Res> extends _$CounterStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object count = freezed,
     Object items = freezed,
+    Object redCounts = freezed,
+    Object greenCounts = freezed,
   }) {
     return _then(_CounterState(
-      count: count == freezed ? _value.count : count as int,
-      items: items == freezed ? _value.items : items as List<Red>,
+      items: items == freezed ? _value.items : items as List<GridItem>,
+      redCounts: redCounts == freezed ? _value.redCounts : redCounts as int,
+      greenCounts:
+          greenCounts == freezed ? _value.greenCounts : greenCounts as int,
     ));
   }
 }
 
 @JsonSerializable()
 class _$_CounterState implements _CounterState {
-  const _$_CounterState({this.count = 0, this.items = const []})
-      : assert(count != null),
-        assert(items != null);
+  const _$_CounterState(
+      {this.items = const [], this.redCounts = 0, this.greenCounts = 0})
+      : assert(items != null),
+        assert(redCounts != null),
+        assert(greenCounts != null);
 
   factory _$_CounterState.fromJson(Map<String, dynamic> json) =>
       _$_$_CounterStateFromJson(json);
 
-  @JsonKey(defaultValue: 0)
-  @override
-  final int count;
   @JsonKey(defaultValue: const [])
   @override
-  final List<Red> items;
+  final List<GridItem> items;
+  @JsonKey(defaultValue: 0)
+  @override
+  final int redCounts;
+  @JsonKey(defaultValue: 0)
+  @override
+  final int greenCounts;
 
   @override
   String toString() {
-    return 'CounterState(count: $count, items: $items)';
+    return 'CounterState(items: $items, redCounts: $redCounts, greenCounts: $greenCounts)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _CounterState &&
-            (identical(other.count, count) ||
-                const DeepCollectionEquality().equals(other.count, count)) &&
             (identical(other.items, items) ||
-                const DeepCollectionEquality().equals(other.items, items)));
+                const DeepCollectionEquality().equals(other.items, items)) &&
+            (identical(other.redCounts, redCounts) ||
+                const DeepCollectionEquality()
+                    .equals(other.redCounts, redCounts)) &&
+            (identical(other.greenCounts, greenCounts) ||
+                const DeepCollectionEquality()
+                    .equals(other.greenCounts, greenCounts)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(count) ^
-      const DeepCollectionEquality().hash(items);
+      const DeepCollectionEquality().hash(items) ^
+      const DeepCollectionEquality().hash(redCounts) ^
+      const DeepCollectionEquality().hash(greenCounts);
 
   @override
   _$CounterStateCopyWith<_CounterState> get copyWith =>
@@ -138,15 +159,18 @@ class _$_CounterState implements _CounterState {
 }
 
 abstract class _CounterState implements CounterState {
-  const factory _CounterState({int count, List<Red> items}) = _$_CounterState;
+  const factory _CounterState(
+      {List<GridItem> items, int redCounts, int greenCounts}) = _$_CounterState;
 
   factory _CounterState.fromJson(Map<String, dynamic> json) =
       _$_CounterState.fromJson;
 
   @override
-  int get count;
+  List<GridItem> get items;
   @override
-  List<Red> get items;
+  int get redCounts;
+  @override
+  int get greenCounts;
   @override
   _$CounterStateCopyWith<_CounterState> get copyWith;
 }

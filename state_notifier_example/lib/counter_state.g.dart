@@ -8,17 +8,19 @@ part of 'counter_state.dart';
 
 _$_CounterState _$_$_CounterStateFromJson(Map<String, dynamic> json) {
   return _$_CounterState(
-    count: json['count'] as int ?? 0,
     items: (json['items'] as List)
             ?.map((e) =>
-                e == null ? null : Red.fromJson(e as Map<String, dynamic>))
+                e == null ? null : GridItem.fromJson(e as Map<String, dynamic>))
             ?.toList() ??
         [],
+    redCounts: json['redCounts'] as int ?? 0,
+    greenCounts: json['greenCounts'] as int ?? 0,
   );
 }
 
 Map<String, dynamic> _$_$_CounterStateToJson(_$_CounterState instance) =>
     <String, dynamic>{
-      'count': instance.count,
       'items': instance.items,
+      'redCounts': instance.redCounts,
+      'greenCounts': instance.greenCounts,
     };
