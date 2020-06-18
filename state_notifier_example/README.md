@@ -5,6 +5,10 @@ State Norifierとfreezedの勉強で作ったサンプルアプリです
 - [state_notifier](https://pub.dev/packages/state_notifier)
 - [freezed](https://pub.dev/packages/freezed)
 
+freezedのコードジェネレートが必要なので以下実行前に↓コマンド
+$ flutter pub run build_runner build
+
+
 -----
 
 - 赤ボタンを押すと赤パネルが増える
