@@ -6,8 +6,8 @@ State Norifierとfreezedの勉強で作ったサンプルアプリです
 - [freezed](https://pub.dev/packages/freezed)
 
 freezedのコードジェネレートが必要なので以下実行前に↓コマンド
-$ flutter pub run build_runner build
 
+flutter packages pub run build_runner build --delete-conflicting-outputs 
 
 -----
 
