@@ -4,8 +4,6 @@ import 'package:state_notifier_example/grid_item.dart';
 
 part 'counter_state.freezed.dart';
 
-part 'counter_state.g.dart';
-
 @freezed
 abstract class CounterState with _$CounterState {
   const factory CounterState({
@@ -13,9 +11,6 @@ abstract class CounterState with _$CounterState {
     @Default(0) int redCounts,
     @Default(0) int greenCounts,
   }) = _CounterState;
-
-  factory CounterState.fromJson(Map<String, dynamic> json) =>
-      _$CounterStateFromJson(json);
 }
 
 class CounterStateNotifier extends StateNotifier<CounterState> {
