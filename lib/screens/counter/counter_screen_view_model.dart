@@ -1,20 +1,21 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:state_notifier/state_notifier.dart';
-import 'package:state_notifier_example/grid_item.dart';
+import 'package:state_notifier_example/flame_work/controller_type.dart';
+import 'package:state_notifier_example/flame_work/state_type.dart';
+import 'package:state_notifier_example/screens/counter/grid_item.dart';
 
-part 'counter_state.freezed.dart';
+part 'counter_screen_view_model.freezed.dart';
 
 @freezed
-abstract class CounterState with _$CounterState {
-  const factory CounterState({
+abstract class State extends StateType with _$State {
+  const factory State({
     @Default([]) List<GridItem> items,
     @Default(0) int redCounts,
     @Default(0) int greenCounts,
-  }) = _CounterState;
+  }) = _State;
 }
 
-class CounterStateNotifier extends StateNotifier<CounterState> {
-  CounterStateNotifier() : super(const CounterState()) {}
+class Controller extends ControllerType<State> {
+  Controller() : super(const State());
 
   addItem(GridItem item) {
     var newList = state.items.toList(growable: true);
@@ -44,7 +45,12 @@ class CounterStateNotifier extends StateNotifier<CounterState> {
 
   int _redItemCount(List<GridItem> items) {
     var a = [for (final item in items) item.runtimeType];
-    return a.where((element) => element == GridItem.red().runtimeType).length;
+    return a
+        .where((element) =>
+    element == GridItem
+        .red()
+        .runtimeType)
+        .length;
   }
 
   int greenItemCount() {
@@ -53,6 +59,11 @@ class CounterStateNotifier extends StateNotifier<CounterState> {
 
   int _greenItemCount(List<GridItem> items) {
     var a = [for (final item in items) item.runtimeType];
-    return a.where((element) => element == GridItem.green().runtimeType).length;
+    return a
+        .where((element) =>
+    element == GridItem
+        .green()
+        .runtimeType)
+        .length;
   }
 }
