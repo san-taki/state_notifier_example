@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:state_notifier_example/flame_work/controller_type.dart';
-import 'package:state_notifier_example/flame_work/state_type.dart';
+import 'package:state_notifier_example/flamework/controller_type.dart';
+import 'package:state_notifier_example/flamework/state_type.dart';
 import 'package:state_notifier_example/screens/counter/grid_item.dart';
 
 part 'counter_screen_view_model.freezed.dart';

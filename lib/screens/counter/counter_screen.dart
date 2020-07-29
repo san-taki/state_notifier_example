@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
+import 'package:state_notifier_example/flamework/screen_type.dart';
 import 'package:state_notifier_example/screens/counter/counter_screen_view_model.dart'
     as vm;
-import 'package:state_notifier_example/flame_work/screen_type.dart';
 import 'package:state_notifier_example/screens/counter/grid_item.dart';
 
-class HomePage extends ScreenType {
+class CounterScreen extends ScreenType {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
