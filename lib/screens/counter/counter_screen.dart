@@ -7,7 +7,7 @@ import 'package:state_notifier_example/screens/counter/counter_screen_view_model
     as vm;
 import 'package:state_notifier_example/screens/counter/grid_item.dart';
 
-class CounterScreen extends ScreenType {
+class CounterScreen extends ScreenType<vm.State, vm.Controller> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -15,29 +15,30 @@ class CounterScreen extends ScreenType {
         StateNotifierProvider<vm.Controller, vm.State>(
             create: (_) => vm.Controller()),
       ],
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('StateNotifierExample'),
-        ),
-        body: _buildGridView(context),
-        floatingActionButton: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            _buildFloatingActionButton(context, FabType.Red),
-            _buildFloatingActionButton(context, FabType.Green),
-            _buildFloatingActionButton(context, FabType.Purple),
-          ],
-        ),
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('StateNotifierExample'),
+            ),
+            body: _buildGridView(context),
+            floatingActionButton: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                _buildFloatingActionButton(context, FabType.Red),
+                _buildFloatingActionButton(context, FabType.Green),
+                _buildFloatingActionButton(context, FabType.Purple),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
 
   Widget _buildGridView(BuildContext context) {
     return GridView(
-        children: context
-            .select<CounterState, List<GridItem>>((state) => state.items)
-            .map((item) => _buildCard(item))
-            .toList(),
+        children: state(context).items.map((item) => _buildCard(item)).toList(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
         ));
@@ -66,19 +67,14 @@ class CounterScreen extends ScreenType {
         return Padding(
           padding: EdgeInsets.all(10),
           child: FloatingActionButton.extended(
-            label: Text(":赤" +
-                context
-                    .select<CounterState, dynamic>((state) => state.redCounts)
-                    .toString() +
-                "枚"),
+            label: Text(":赤" + state(context).redCounts.toString() + "枚"),
             icon: Icon(
               Icons.add,
               color: Colors.white,
             ),
             backgroundColor: Colors.red,
             onPressed: () {
-              var sn = context.read<CounterStateNotifier>();
-              sn.addItem(GridItem.red(sn.redItemCount() + 1));
+              controller(context).addItem(GridItem.red(controller(context).redItemCount() + 1));
             },
           ),
         );
@@ -87,19 +83,14 @@ class CounterScreen extends ScreenType {
         return Padding(
           padding: EdgeInsets.all(10),
           child: FloatingActionButton.extended(
-            label: Text(":緑" +
-                context
-                    .select<CounterState, dynamic>((state) => state.greenCounts)
-                    .toString() +
-                "枚"),
+            label: Text(":緑" + state(context).greenCounts.toString() + "枚"),
             icon: Icon(
               Icons.add,
               color: Colors.white,
             ),
             backgroundColor: Colors.green,
             onPressed: () {
-              var sn = context.read<CounterStateNotifier>();
-              sn.addItem(GridItem.green(sn.greenItemCount() + 1));
+              controller(context).addItem(GridItem.green(controller(context).greenItemCount() + 1));
             },
           ),
         );
@@ -114,7 +105,7 @@ class CounterScreen extends ScreenType {
             ),
             backgroundColor: Colors.deepPurple,
             onPressed: () {
-              context.read<CounterStateNotifier>().removeItem();
+              controller(context).removeItem();
             },
           ),
         );
